@@ -2,23 +2,20 @@
 var express = require('express');
 var mongoose = require('mongoose');
 
-// var option = {
-//     socketTimeoutMS: 30000,
-//     keepAlive: true,
-//     reconnectTries: 30000
-// };
 
-// var mongoURI = process.env.MONGODB_URI;
-// mongoose.connect(mongoURI, option).then(function(){
-//     //connected successfully
-// }, function(err) {
-//     //err handle
-// });
 
 var bodyParser = require('body-parser');
 
 // Inicializar variables
 var app = express();
+
+// CORS
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Acces-Control-Allow-Methods","POST, GET, PUT, DELETE, OPTIONS");
+    next();
+  });
 
 // Body parser
 // parse application/x-www-form-urlencoded
