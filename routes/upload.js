@@ -73,7 +73,7 @@ function subirPorTipo(tipo, id, nombreArchivo, res) {
 
   if (tipo === 'usuarios') {
 
-    if(!usuario){
+    if(!Usuario){
       return res.status(400).json({
         ok: false,
         mensaje: " Usuario no existe",
@@ -88,7 +88,7 @@ function subirPorTipo(tipo, id, nombreArchivo, res) {
       }
 
       usuario.img = nombreArchivo;
-      usuarioActualizado.password = 'xD';
+      usuario.password = 'xD';
 
       usuario.save((err, usuarioActualizado) => {
         return res.status(200).json({
