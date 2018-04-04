@@ -20,36 +20,36 @@ app.get('/coleccion/:tabla/:busqueda', (req,res) => {
     var regex = new RegExp( busqueda, 'i');
     
 
-    if(tabla === 'usuario'){
-        buscarUsuarios(busqueda, regex).then( usuarios => {
-            res.status(200).json({
-                ok: true,
-                usuarios: usuarios
+    switch (tabla) {
+
+        case 'usuarios':
+            promesa = buscarUsuarios(busqueda, regex);
+            break;
+
+        case 'medicos':
+            promesa = buscarMedicos(busqueda, regex);
+            break;
+
+        case 'hospitales':
+            promesa = buscarHospitales(busqueda, regex);
+            break;
+
+        default:
+            return res.status(400).json({
+                ok: false,
+                mensaje: 'Los tipos de busqueda sólo son: usuarios, medicos y hospitales',
+                error: { message: 'Tipo de tabla/coleccion no válido' }
             });
-        });
+
     }
-    if(tabla === 'medico'){
-        buscarMedicos(busqueda,regex).then( medicos => {
-            res.status(200).json({
-                ok: true,
-                medicos: medicos
-            });
+    promesa.then(data => {
+
+        res.status(200).json({
+            ok: true,
+            [tabla]: data
         });
-    }
-    if(tabla === 'hospital'){
-        buscarHospitales(busqueda,regex).then( hospitales => {
-            res.status(200).json({
-                ok: true,
-                hospitales: hospitales
-            });
-        });
-    } else{
-        res.status(400).json({
-            ok: false,
-            mensaje: 'Los tipos de busqueda sólo son: usuario,medico y hospital',
-            error: {message: 'Los tipos de busqueda sólo son: usuario, medico y hospital'}
-        });
-    }
+
+    })
 });
 
 
