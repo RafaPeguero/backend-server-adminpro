@@ -20,7 +20,7 @@ app.get('/', (req, res, next) => {
   desde = Number(desde);
 
 
-    Hospital.find({}).skip(desde).limit(5).populate('usuario', 'nombre email').exec((err, hospitales) => {
+    Hospital.find({}).skip(desde).limit(5).populate('usuario', 'nombre email ').exec((err, hospitales) => {
       if (err) {
         return res.status(500).json({
           ok: false,

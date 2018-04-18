@@ -23,3 +23,45 @@ exports.verificaToken = function(req, res, next){
     });
 
 };
+
+// ===============================================
+// Verificar Admin
+//================================================ 
+exports.verificaAdmin_Role = function(req, res, next){
+  var usuario = req.usuario;
+
+  if( usuario.role === 'ADMIN_ROLE') {
+    next();
+    return;
+  } else {
+    return res.status(401).json({
+      ok: false,
+      mensaje: "Token incorrecto",
+      errors: {menssage: 'No es administrador no puede hacer eso'}
+    });
+
+  }
+
+};
+
+
+// ===============================================
+// Verificar Admin o mismo usuario
+//================================================ 
+exports.verificaAdmin_o_MismoUsuario = function(req, res, next){
+  var usuario = req.usuario;
+  var id = req.params.id;
+
+  if( usuario.role === 'ADMIN_ROLE' || usuario._id === id ) {
+    next();
+    return;
+  } else {
+    return res.status(401).json({
+      ok: false,
+      mensaje: "Token incorrecto",
+      errors: {menssage: 'No es administrador no puede hacer eso'}
+    });
+
+  }
+
+};
