@@ -37,7 +37,7 @@ exports.verificaAdmin_Role = function(req, res, next){
     return res.status(401).json({
       ok: false,
       mensaje: "Token incorrecto",
-      errors: {menssage: 'No es administrador no puede hacer eso'}
+      errors: {message: 'No es administrador no puede hacer eso'}
     });
 
   }
@@ -59,7 +59,7 @@ exports.verificaAdmin_o_MismoUsuario = function(req, res, next){
     return res.status(401).json({
       ok: false,
       mensaje: "Token incorrecto",
-      errors: {menssage: 'No es administrador no puede hacer eso'}
+      errors: {message: 'No es administrador no puede hacer eso'}
     });
 
   }

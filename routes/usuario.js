@@ -91,7 +91,7 @@ app.put("/:id", [mAutenticacion.verificaToken, mAutenticacion.verificaAdmin_o_Mi
 // Crear un nuevo  usuario
 //================================================
 
-app.post("/", mAutenticacion.verificaAdmin_o_MismoUsuario, (req, res) => {
+app.post("/", (req, res) => {
   var body = req.body;
 
   var usuario = new Usuario({

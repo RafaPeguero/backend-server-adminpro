@@ -15,6 +15,20 @@ const GOOGLE_CLIENT_ID = require('../config/config').GOOGLE_CLIENT_ID
 const {OAuth2Client} = require('google-auth-library');
 const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 
+var mdAutenticacion = require('../middlewares/autenticacion');
+
+
+
+// ===============================================
+// RENOVAR TOKEN
+//================================================ 
+app.get('/renuevaToken',mdAutenticacion.verificaToken ,(req, res) => {
+    var token = jwt.sign({ usuario: req.usuario }, SEED, { expiresIn: 15500 }) // 4 horas
+    return res.status(200).json({
+        ok: true,
+        token: token
+    });
+})
 
 //const GOOGLE_SECRET = require('../config/config').GOOGLE_SECRET
 // ===============================================
